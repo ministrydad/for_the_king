@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt Hayes | Illusionist — For The King</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #d4a853;
+  --gold-light: #f0d68a;
+  --gold-dark: #a07830;
+  --black: #0a0a0a;
+  --deep: #111111;
+  --charcoal: #1a1a1a;
+  --smoke: #2a2a2a;
+  --text: #e8e4dc;
+  --text-dim: #8a8680;
+  --cream: #f5f0e8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════ PRELOADER ═══════════════ */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  animation: preloaderOut 0.8s 3.5s forwards;
+}
+.ftk-logo-anim {
+  width: 280px;
+  height: auto;
+}
+.logo-draw {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawIn 1.5s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.logo-draw.delay1 { animation-delay: 0.6s; }
+.logo-draw.delay2 { animation-delay: 0.9s; }
+.logo-draw.delay3 { animation-delay: 1.2s; }
+.logo-draw.delay4 { animation-delay: 1.5s; }
+
+@keyframes drawIn {
+  to { stroke-dashoffset: 0; }
+}
+.logo-text-anim {
+  opacity: 0;
+  animation: textReveal 1s 2.2s forwards;
+}
+@keyframes textReveal {
+  from { opacity: 0; letter-spacing: 16px; }
+  to { opacity: 1; letter-spacing: 8px; }
+}
+@keyframes preloaderOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+/* ═══════════════ NAV ═══════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  transition: background 0.4s;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.nav-brand {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 0.6rem 1.8rem;
+  border: 1px solid var(--gold);
+  color: var(--gold) !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.nav-cta:hover {
+  background: var(--gold);
+  color: var(--black) !important;
+}
+
+/* ═══════════════ HERO ═══════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,168,83,0.08), transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(212,168,83,0.04), transparent),
+    radial-gradient(ellipse 40% 50% at 80% 20%, rgba(100,60,20,0.06), transparent),
+    var(--black);
+}
+.hero-particles {
+  position: absolute; inset: 0; overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 6s infinite;
+}
+@keyframes particleFloat {
+  0% { opacity: 0; transform: translateY(0) scale(0); }
+  20% { opacity: 0.8; transform: translateY(-20px) scale(1); }
+  100% { opacity: 0; transform: translateY(-200px) scale(0); }
+}
+.hero-spotlight {
+  position: absolute;
+  width: 600px; height: 800px;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(212,168,83,0.03) 0%, transparent 70%);
+  animation: spotlightPulse 8s ease-in-out infinite;
+}
+@keyframes spotlightPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 2rem;
+}
+.hero-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 3.8s forwards;
+}
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  margin-bottom: 0.3em;
+  opacity: 0;
+  animation: fadeUp 1s 4s forwards;
+}
+.hero-title .gold { color: var(--gold); }
+.hero-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 1s 4.2s forwards;
+}
+.hero-ctas {
+  display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 4.4s forwards;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 1rem 3rem;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(212,168,83,0.3); }
+
+.btn-outline {
+  display: inline-block;
+  padding: 1rem 3rem;
+  border: 1px solid rgba(212,168,83,0.4);
+  color: var(--gold);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  background: rgba(212,168,83,0.08);
+}
+
+.hero-scroll-indicator {
+  position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 4.8s forwards;
+}
+.hero-scroll-indicator span {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s infinite;
+}
+@keyframes scrollPulse {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  50.1% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════ SECTION STYLES ═══════════════ */
+section { padding: 8rem 2rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ═══════════════ DIVIDER ═══════════════ */
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+.divider-line { width: 80px; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dark), transparent); }
+.divider-diamond {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ═══════════════ VIDEO / REEL SECTION ═══════════════ */
+.reel-section {
+  padding: 0 2rem 8rem;
+}
+.reel-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+.reel-wrapper {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--charcoal);
+  border: 1px solid rgba(212,168,83,0.15);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.reel-wrapper::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(10,10,10,0.6)),
+    linear-gradient(135deg, rgba(212,168,83,0.05), transparent 50%);
+}
+.reel-placeholder {
+  text-align: center;
+  position: relative; z-index: 2;
+}
+.play-btn {
+  width: 90px; height: 90px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: all 0.4s;
+  background: rgba(212,168,83,0.05);
+}
+.play-btn:hover {
+  background: rgba(212,168,83,0.15);
+  transform: scale(1.1);
+  box-shadow: 0 0 60px rgba(212,168,83,0.2);
+}
+.play-btn svg { margin-left: 4px; }
+.reel-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ═══════════════ ABOUT ═══════════════ */
+.about {
+  background: var(--deep);
+  position: relative;
+  overflow: hidden;
+}
+.about::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  right: -200px; top: -200px;
+  background: radial-gradient(circle, rgba(212,168,83,0.04), transparent 70%);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.about-image-wrapper {
+  position: relative;
+}
+.about-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--charcoal);
+  border: 1px solid rgba(212,168,83,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.about-image-inner {
+  width: 100%; height: 100%;
+  background:
+    linear-gradient(135deg, var(--smoke), var(--charcoal)),
+    url('https://static.wixstatic.com/media/555ecd_5269d08686a2495e9802c627da0a5a21~mv2.jpg/v1/fill/w_600,h_800,al_c,q_80,enc_avif,quality_auto/555ecd_5269d08686a2495e9802c627da0a5a21~mv2.jpg');
+  background-size: cover;
+  background-position: center;
+  transition: transform 6s;
+}
+.about-image:hover .about-image-inner { transform: scale(1.05); }
+.about-image-frame {
+  position: absolute;
+  top: -15px; left: -15px; right: -15px; bottom: -15px;
+  border: 1px solid rgba(212,168,83,0.15);
+  pointer-events: none;
+}
+.about-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--gold-dark);
+}
+.about-text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+.about-signature {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--gold);
+}
+
+/* ═══════════════ SHOW FEATURES ═══════════════ */
+.features {
+  position: relative;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 4rem;
+}
+.feature-card {
+  background: var(--deep);
+  padding: 3.5rem 2.5rem;
+  position: relative;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.feature-card:hover::before { opacity: 1; }
+.feature-card:hover { background: var(--charcoal); }
+.feature-icon {
+  margin-bottom: 1.5rem;
+  color: var(--gold);
+}
+.feature-icon i[data-lucide] {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.5;
+}
+.feature-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+.feature-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ═══════════════ TESTIMONIALS ═══════════════ */
+.testimonials {
+  background: var(--deep);
+  position: relative;
+  overflow: hidden;
+}
+.testimonials::before {
+  content: '"';
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-size: 40rem;
+  color: rgba(212,168,83,0.02);
+  top: -8rem; left: -3rem;
+  line-height: 1;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+}
+.testimonial-card {
+  padding: 2.5rem;
+  border: 1px solid rgba(212,168,83,0.08);
+  background: rgba(26,26,26,0.5);
+  transition: all 0.4s;
+}
+.testimonial-card:hover {
+  border-color: rgba(212,168,83,0.25);
+  transform: translateY(-4px);
+}
+.testimonial-stars {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.5rem;
+}
+.testimonial-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+.testimonial-author {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+.testimonial-role {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+}
+
+/* ═══════════════ GALLERY ═══════════════ */
+.gallery {
+  position: relative;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 300px 300px;
+  gap: 4px;
+  margin-top: 4rem;
+}
+.gallery-item {
+  background: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.gallery-item:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-item-inner {
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s;
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-item:hover .gallery-item-inner { transform: scale(1.08); }
+.gallery-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.7), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  display: flex; align-items: flex-end;
+  padding: 1.5rem;
+}
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item-caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.gallery-placeholder-icon {
+  color: var(--gold);
+  opacity: 0.15;
+}
+
+/* ═══════════════ BOOKING CTA ═══════════════ */
+.booking-cta {
+  text-align: center;
+  position: relative;
+  padding: 10rem 2rem;
+  overflow: hidden;
+}
+.booking-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,168,83,0.06), transparent),
+    var(--black);
+}
+.booking-content {
+  position: relative; z-index: 2;
+}
+.booking-cta .section-title {
+  max-width: 700px;
+  margin: 0 auto 1rem;
+}
+.booking-cta .section-subtitle {
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+/* ═══════════════ BOOKING FORM ═══════════════ */
+.booking-form-section {
+  background: var(--deep);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.form-info h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+.form-info p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+.form-contact-item {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.form-contact-icon {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(212,168,83,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.form-contact-icon i[data-lucide] {
+  width: 18px;
+  height: 18px;
+}
+.form-contact-text {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.form-contact-text a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.booking-form {
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--charcoal);
+  border: 1px solid rgba(212,168,83,0.1);
+  color: var(--text);
+  padding: 1rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select { cursor: pointer; }
+.form-group select option { background: var(--charcoal); }
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer {
+  padding: 4rem 2rem 2rem;
+  border-top: 1px solid rgba(212,168,83,0.08);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 2rem;
+}
+.footer-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+.footer-tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+}
+.footer-socials {
+  display: flex; gap: 1rem;
+}
+.footer-socials a {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(212,168,83,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.footer-socials a:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(212,168,83,0.05);
+}
+.footer-socials a i[data-lucide] {
+  width: 18px;
+  height: 18px;
+}
+.footer-bottom {
+  max-width: 1200px; margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 250px 250px 250px;
+  }
+  .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+  .form-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div class="preloader">
+  <svg class="ftk-logo-anim" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+    <path class="logo-draw" d="M40,200 L40,60 L110,60" fill="none" stroke="#d4a853" stroke-width="3"/>
+    <path class="logo-draw delay1" d="M40,125 L90,125" fill="none" stroke="#d4a853" stroke-width="3"/>
+    <path class="logo-draw delay1" d="M35,200 C35,195 30,192 28,195 C26,198 32,205 45,205 C55,205 50,198 45,200" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+    <path class="logo-draw" d="M105,55 C108,52 112,54 112,60 C112,66 108,65 105,65" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+    <path class="logo-draw delay2" d="M200,10 L200,220" fill="none" stroke="#d4a853" stroke-width="4"/>
+    <path class="logo-draw delay2" d="M160,70 L240,70" fill="none" stroke="#d4a853" stroke-width="4"/>
+    <path class="logo-draw delay3" d="M155,65 L155,75 M245,65 L245,75" fill="none" stroke="#d4a853" stroke-width="2"/>
+    <path class="logo-draw delay3" d="M195,215 L205,215" fill="none" stroke="#d4a853" stroke-width="2"/>
+    <path class="logo-draw delay3" d="M280,200 L280,60" fill="none" stroke="#d4a853" stroke-width="3"/>
+    <path class="logo-draw delay4" d="M280,140 L340,60" fill="none" stroke="#d4a853" stroke-width="3"/>
+    <path class="logo-draw delay4" d="M305,120 L355,200" fill="none" stroke="#d4a853" stroke-width="3"/>
+    <path class="logo-draw delay4" d="M275,200 C275,195 270,192 268,195 C266,198 272,205 285,205 C295,205 290,198 285,200" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+    <path class="logo-draw delay4" d="M335,55 C338,52 342,54 345,60" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+    <path class="logo-draw delay4" d="M350,195 C353,198 358,205 362,200" fill="none" stroke="#d4a853" stroke-width="1.5"/>
+    <text class="logo-text-anim" x="200" y="250" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="16" letter-spacing="8" fill="#d4a853">FOR THE KING</text>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-brand">Matt Hayes</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#show">The Show</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-spotlight"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Matt Hayes · Illusionist</p>
+    <h1 class="hero-title">Prepare to<br><span class="gold">Believe</span></h1>
+    <p class="hero-subtitle">Entertain. Empower. Evangelize.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Book Your Event</a>
+      <a href="#reel" class="btn-outline">Watch the Reel</a>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- VIDEO REEL -->
+<section class="reel-section" id="reel">
+  <div class="reel-container reveal">
+    <div class="reel-wrapper">
+      <div class="reel-placeholder">
+        <div class="play-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <polygon points="6,3 20,12 6,21" fill="#d4a853"/>
+          </svg>
+        </div>
+        <p class="reel-label">Watch the Highlight Reel</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image-wrapper reveal">
+        <div class="about-image">
+          <div class="about-image-inner"></div>
+        </div>
+        <div class="about-image-frame"></div>
+      </div>
+      <div>
+        <p class="section-label reveal">The Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Who is<br>Matt Hayes?</h2>
+        <blockquote class="about-quote reveal reveal-delay-2">
+          "It all started on the couch, watching a magician on TV — and my dad leaned over and said, 'I bet you can't do that.'"
+        </blockquote>
+        <p class="about-text reveal reveal-delay-3">
+          Challenge accepted. What started as a simple dare turned into a decade-long passion. Today, through illusion, comedy, and storytelling, Matt creates high-energy experiences that bring people together — and point them to something greater.
+        </p>
+        <p class="about-text reveal reveal-delay-3">
+          Every show is clean, family-friendly, and designed to do more than entertain. It's about creating moments that last — moments that spark wonder, provoke thought, and open hearts.
+        </p>
+        <p class="about-signature reveal reveal-delay-4">— Matt Hayes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOW FEATURES -->
+<section class="features" id="show">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <p class="section-label reveal">The Experience</p>
+      <h2 class="section-title reveal reveal-delay-1">More Than a Magic Show</h2>
+      <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">
+        Every performance weaves together illusion, humor, and faith into something unforgettable.
+      </p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i data-lucide="sparkles"></i></div>
+        <h3 class="feature-title">Grand Illusions</h3>
+        <p class="feature-desc">From sleight of hand to stage-scale spectacles, each effect is crafted to spark genuine wonder and leave audiences speechless.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon"><i data-lucide="smile"></i></div>
+        <h3 class="feature-title">Clean Comedy</h3>
+        <p class="feature-desc">Quick wit, audience interaction, and lighthearted humor create an atmosphere where everyone — from kids to grandparents — can relax and laugh.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon"><i data-lucide="cross"></i></div>
+        <h3 class="feature-title">A Message of Hope</h3>
+        <p class="feature-desc">At the center of every performance is a desire to point people to Christ — through stories, metaphors, and moments that reach the heart.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon"><i data-lucide="book-open"></i></div>
+        <h3 class="feature-title">Storytelling</h3>
+        <p class="feature-desc">Every illusion is woven into a narrative — connecting tricks to truths, and turning each moment on stage into something deeper and more meaningful.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-4">
+        <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+        <h3 class="feature-title">Everyday to Extravagant</h3>
+        <p class="feature-desc">The show builds from intimate close-up moments to jaw-dropping spectacles, keeping the energy rising from the first minute to the last.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-5">
+        <div class="feature-icon"><i data-lucide="users"></i></div>
+        <h3 class="feature-title">Any Audience, Any Venue</h3>
+        <p class="feature-desc">Churches, corporate events, schools, private parties — every show is tailored to fit the audience, the space, and the occasion perfectly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="reviews">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <p class="section-label reveal">What People Say</p>
+      <h2 class="section-title reveal reveal-delay-1">Reactions from the Crowd</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">"Matt's heart for Jesus and his passion for giving others opportunities to display their God-given gifts could not be more evident!"</p>
+        <p class="testimonial-author">Church Event Coordinator</p>
+        <p class="testimonial-role">Youth Conference 2024</p>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">"Our entire congregation was captivated. The kids were screaming, the adults were laughing, and the message at the end brought people to tears."</p>
+        <p class="testimonial-author">Pastor Mike D.</p>
+        <p class="testimonial-role">Sunday Evening Service</p>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">"We've hosted dozens of performers over the years — Matt is in a class of his own. Professional, hilarious, and genuinely impactful."</p>
+        <p class="testimonial-author">Events Director</p>
+        <p class="testimonial-role">Community Outreach Night</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <p class="section-label reveal">Gallery</p>
+      <h2 class="section-title reveal reveal-delay-1">Moments from the Stage</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <div class="gallery-item-inner" style="background: linear-gradient(135deg, #1a1510, #2a2018);">
+          <i data-lucide="wand-2" class="gallery-placeholder-icon" style="width:48px;height:48px;"></i>
+        </div>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-caption">Live Performance</span>
+        </div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <div class="gallery-item-inner" style="background: linear-gradient(135deg, #15151a, #1a2028);">
+          <i data-lucide="hand" class="gallery-placeholder-icon" style="width:36px;height:36px;"></i>
+        </div>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-caption">Close-Up Magic</span>
+        </div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <div class="gallery-item-inner" style="background: linear-gradient(135deg, #1a1815, #28201a);">
+          <i data-lucide="heart" class="gallery-placeholder-icon" style="width:36px;height:36px;"></i>
+        </div>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-caption">Audience Reactions</span>
+        </div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <div class="gallery-item-inner" style="background: linear-gradient(135deg, #151a15, #1a281a);">
+          <i data-lucide="church" class="gallery-placeholder-icon" style="width:36px;height:36px;"></i>
+        </div>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-caption">Church Events</span>
+        </div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-4">
+        <div class="gallery-item-inner" style="background: linear-gradient(135deg, #1a1518, #281a20);">
+          <i data-lucide="camera" class="gallery-placeholder-icon" style="width:36px;height:36px;"></i>
+        </div>
+        <div class="gallery-item-overlay">
+          <span class="gallery-item-caption">Behind the Scenes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING CTA -->
+<section class="booking-cta">
+  <div class="booking-content">
+    <p class="section-label reveal">Ready?</p>
+    <h2 class="section-title reveal reveal-delay-1">Bring the Wonder<br>to Your Event</h2>
+    <p class="section-subtitle reveal reveal-delay-2">
+      Available for churches, conferences, corporate events, schools, and private gatherings.
+    </p>
+    <div class="reveal reveal-delay-3">
+      <a href="#contact" class="btn-primary">Book Matt Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="booking-form-section" id="contact">
+  <div class="section-inner">
+    <div class="form-grid">
+      <div class="form-info reveal">
+        <p class="section-label">Get in Touch</p>
+        <h3>Let's Make Something<br>Unforgettable</h3>
+        <p>Whether you're planning a church event, a conference, a school assembly, or a private party — reach out and let's talk about how to make it extraordinary.</p>
+        <div style="margin-top: 2rem;">
+          <div class="form-contact-item">
+            <div class="form-contact-icon"><i data-lucide="mail"></i></div>
+            <div class="form-contact-text"><a href="mailto:fortheking137@gmail.com">fortheking137@gmail.com</a></div>
+          </div>
+          <div class="form-contact-item">
+            <div class="form-contact-icon"><i data-lucide="instagram"></i></div>
+            <div class="form-contact-text"><a href="https://www.instagram.com/fortheking137/" target="_blank">@fortheking137</a></div>
+          </div>
+          <div class="form-contact-item">
+            <div class="form-contact-icon"><i data-lucide="youtube"></i></div>
+            <div class="form-contact-text"><a href="https://www.youtube.com/@ForTheKing137" target="_blank">YouTube Channel</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="booking-form reveal reveal-delay-2">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Event Date</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label>Event Type</label>
+            <select>
+              <option value="">Select one...</option>
+              <option>Church Service</option>
+              <option>Youth Conference</option>
+              <option>Corporate Event</option>
+              <option>School Assembly</option>
+              <option>Private Party</option>
+              <option>Outreach / Evangelism</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Expected Attendance</label>
+          <select>
+            <option value="">Roughly how many people?</option>
+            <option>Under 50</option>
+            <option>50 – 150</option>
+            <option>150 – 500</option>
+            <option>500+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Me About Your Event</label>
+          <textarea placeholder="What's the occasion? Any details that would help me tailor the show..."></textarea>
+        </div>
+        <button class="btn-primary" type="button" style="align-self:flex-start; border:none; cursor:pointer;">
+          Send Inquiry
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">FOR THE KING</div>
+      <div class="footer-tagline">Entertain. Empower. Evangelize.</div>
+    </div>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/fortheking137/" target="_blank" title="Instagram"><i data-lucide="instagram"></i></a>
+      <a href="https://www.youtube.com/@ForTheKing137" target="_blank" title="YouTube"><i data-lucide="youtube"></i></a>
+      <a href="https://www.facebook.com/share/1GrByDXWAZ/" target="_blank" title="Facebook"><i data-lucide="facebook"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Matt Hayes &mdash; For The King. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Initialize Lucide icons
+lucide.createIcons();
+
+// Particles
+const container = document.getElementById('particles');
+for (let i = 0; i < 40; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.top = 40 + Math.random() * 60 + '%';
+  p.style.animationDelay = Math.random() * 6 + 's';
+  p.style.animationDuration = (4 + Math.random() * 4) + 's';
+  p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+  container.appendChild(p);
+}
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
