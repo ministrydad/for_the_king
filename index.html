@@ -32,6 +32,18 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='%23d4a853'%3E%3C!-- Spade --%3E%3Cpath d='M50,80 C50,65 35,50 25,60 C15,70 25,85 50,100 C75,85 85,70 75,60 C65,50 50,65 50,80Z M45,100 L55,100 L52,115 L48,115Z' transform='scale(0.5) translate(20,20)'/%3E%3C!-- Heart --%3E%3Cpath d='M200,60 C200,45 185,35 175,45 C165,55 175,70 200,90 C225,70 235,55 225,45 C215,35 200,45 200,60Z' transform='scale(0.4) translate(100,30)'/%3E%3C!-- Diamond --%3E%3Cpolygon points='300,30 320,55 300,80 280,55' transform='scale(0.45) translate(30,20)'/%3E%3C!-- Club --%3E%3Ccircle cx='200' cy='155' r='12'/%3E%3Ccircle cx='188' cy='172' r='12'/%3E%3Ccircle cx='212' cy='172' r='12'/%3E%3Crect x='197' y='178' width='6' height='16'/%3E%3C!-- Top Hat --%3E%3Cpath d='M70,220 L70,260 L130,260 L130,220 L140,220 L140,225 L60,225 L60,220Z M80,220 L80,190 C80,185 85,182 100,182 C115,182 120,185 120,190 L120,220Z' transform='scale(0.5) translate(0,10)'/%3E%3C!-- Rabbit --%3E%3Cpath d='M320,200 C320,190 315,175 312,165 C310,158 313,150 313,150 C313,150 316,158 318,158 C320,158 322,150 322,150 C322,150 326,158 324,165 C321,175 325,190 325,190 C330,195 332,202 330,210 C328,218 322,222 320,222 C318,222 312,218 310,210 C308,202 310,195 315,190Z' transform='scale(0.5) translate(20,15)'/%3E%3C!-- Playing Card --%3E%3Crect x='280' y='95' width='40' height='56' rx='4' stroke='%23d4a853' stroke-width='1' fill='none' transform='rotate(-15, 300, 123)'/%3E%3Crect x='290' y='100' width='40' height='56' rx='4' stroke='%23d4a853' stroke-width='1' fill='none' transform='rotate(5, 310, 128)'/%3E%3C!-- Wand --%3E%3Cline x1='50' y1='310' x2='120' y2='270' stroke='%23d4a853' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='125' cy='267' r='3'/%3E%3Ccircle cx='132' cy='262' r='2'/%3E%3Ccircle cx='128' cy='258' r='1.5'/%3E%3C!-- Stars scattered --%3E%3Cpolygon points='350,320 352,326 358,326 353,330 355,336 350,332 345,336 347,330 342,326 348,326' transform='scale(0.7)'/%3E%3Cpolygon points='180,350 181,354 185,354 182,356 183,360 180,358 177,360 178,356 175,354 179,354' transform='scale(0.8)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+/* Ensure all sections sit above the pattern */
+nav, section, .divider, footer, .preloader, .reel-section { position: relative; z-index: 1; }
 
 /* ═══════════════ PRELOADER ═══════════════ */
 .preloader {
